@@ -14,7 +14,12 @@
         .glass { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
         .hero-curve { border-radius: 0 0 40px 40px; }
         @media (min-width: 1024px) { .hero-curve { border-radius: 0 0 100px 100px; } }
-        #mobile-menu { transition: transform 0.3s ease-in-out; transform: translateX(100%); }
+        
+        /* Fix Mobile Menu Overlay */
+        #mobile-menu { 
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            transform: translateX(100%); 
+        }
         #mobile-menu.active { transform: translateX(0); }
     </style>
 </head>
@@ -33,13 +38,16 @@
             <div class="hidden lg:flex items-center space-x-6 text-[13px] font-bold text-slate-600">
                 <a href="#" class="hover:text-emerald-600 transition">Beranda</a>
                 <a href="#" class="hover:text-emerald-600 transition">Profil</a>
+                
                 <div class="relative group cursor-pointer">
                     <span class="flex items-center hover:text-emerald-600">Organisasi <i class="fas fa-chevron-down ml-1 text-[10px]"></i></span>
-                    <div class="absolute hidden group-hover:block bg-white shadow-xl border border-gray-100 rounded-xl p-4 w-48 mt-2">
-                        <a href="#" class="block py-2 hover:text-emerald-600">Majelis</a>
-                        <a href="#" class="block py-2 hover:text-emerald-600 italic">GEO AI Optimized</a>
+                    <div class="absolute hidden group-hover:block bg-white shadow-2xl border border-gray-100 rounded-2xl p-4 w-64 mt-2 left-0 animate-in fade-in slide-in-from-top-2 duration-200">
+                        <a href="#" class="block py-2 px-3 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition">Majelis & Lembaga</a>
+                        <a href="#" class="block py-2 px-3 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition">Pimpinan Ranting (PRM)</a>
+                        <a href="#" class="block py-2 px-3 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition">Organisasi Otonom (Ortom)</a>
                     </div>
                 </div>
+
                 <a href="#" class="text-emerald-700 font-extrabold transition">Amal Usaha</a>
                 <a href="#" class="hover:text-emerald-600 transition">Berita</a>
                 <a href="#" class="hover:text-emerald-600 transition">Kontak</a>
@@ -47,39 +55,52 @@
 
             <div class="flex items-center space-x-3">
                 <button class="btn-donasi text-white px-4 py-2 md:px-6 md:py-2.5 rounded-full text-[10px] md:text-xs font-extrabold shadow-lg uppercase">Donasi</button>
-                <button id="menu-btn" class="lg:hidden text-slate-800 p-2">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <button id="menu-btn" class="lg:hidden text-slate-800 p-2 focus:outline-none">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                 </button>
             </div>
         </div>
     </nav>
 
     <div id="mobile-menu" class="fixed inset-0 bg-white z-[150] lg:hidden p-8 flex flex-col">
-        <div class="flex justify-between items-center mb-8 border-b pb-4">
+        <div class="flex justify-between items-center mb-10 border-b pb-5">
             <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 gradient-main rounded-lg flex items-center justify-center text-white font-bold">M</div>
-                <span class="font-bold text-sm">PCM KARANGPLOSO</span>
+                <div class="w-9 h-9 gradient-main rounded-lg flex items-center justify-center text-white font-bold">M</div>
+                <span class="font-black text-sm tracking-tight text-slate-800">PCM KARANGPLOSO</span>
             </div>
-            <button id="close-menu" class="text-3xl font-bold text-slate-400">&times;</button>
+            <button id="close-menu" class="text-4xl leading-none text-slate-400 hover:text-red-500 transition">&times;</button>
         </div>
-        <div class="flex flex-col space-y-6 text-lg font-bold text-slate-800">
-            <a href="#" class="text-emerald-600">Beranda</a>
-            <a href="#">Profil</a>
-            <div class="flex justify-between items-center">
-                <span>Organisasi</span>
-                <i class="fas fa-chevron-down text-sm"></i>
+        
+        <div class="flex flex-col space-y-5 text-lg font-bold text-slate-800 overflow-y-auto">
+            <a href="#" class="text-emerald-600 flex items-center">Beranda</a>
+            <a href="#" class="flex items-center">Profil</a>
+            
+            <div class="space-y-4">
+                <button id="mobile-org-btn" class="flex justify-between items-center w-full">
+                    <span>Organisasi</span>
+                    <i id="org-arrow" class="fas fa-chevron-down text-sm transition-transform"></i>
+                </button>
+                <div id="mobile-org-content" class="hidden flex flex-col space-y-4 pl-4 border-l-2 border-emerald-100 text-base font-semibold text-slate-500">
+                    <a href="#">Majelis & Lembaga</a>
+                    <a href="#">Pimpinan Ranting (PRM)</a>
+                    <a href="#">Organisasi Otonom (Ortom)</a>
+                </div>
             </div>
-            <a href="#">Amal Usaha</a>
-            <a href="#">Berita</a>
-            <a href="#">Kontak</a>
+
+            <a href="#" class="flex items-center">Amal Usaha</a>
+            <a href="#" class="flex items-center">Berita</a>
+            <a href="#" class="flex items-center">Kontak</a>
         </div>
-        <button class="mt-auto w-full btn-donasi text-white py-4 rounded-2xl font-black shadow-xl uppercase">Donasi</button>
+        
+        <button class="mt-auto w-full btn-donasi text-white py-4 rounded-2xl font-black shadow-xl uppercase tracking-widest">Donasi Sekarang</button>
     </div>
 
     <header class="gradient-main hero-curve pt-10 pb-20 lg:pt-16 lg:pb-32 px-5 text-white">
         <div class="container mx-auto grid lg:grid-cols-2 gap-8 items-center">
             <div class="order-2 lg:order-1">
-                <div class="glass rounded-[2rem] p-6 lg:p-10 shadow-2xl">
+                <div class="glass rounded-[2rem] p-6 lg:p-10 shadow-2xl border-white/30">
                     <h2 class="text-2xl lg:text-4xl font-extrabold mt-2 mb-4 leading-tight">
                         Mencerahkan Umat, <br> Memajukan Bangsa.
                     </h2>
@@ -92,8 +113,8 @@
                 </div>
             </div>
             <div class="order-1 lg:order-2">
-                <div class="relative rounded-[2rem] overflow-hidden border-4 border-white/20 shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" class="w-full h-44 lg:h-80 object-cover">
+                <div class="relative rounded-[2rem] overflow-hidden border-4 border-white/20 shadow-2xl group">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" class="w-full h-44 lg:h-80 object-cover group-hover:scale-105 transition duration-700">
                     <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 p-4 text-center">
                         <p class="text-xs lg:text-base font-black uppercase tracking-wider">SDU Permata Mulia Malang</p>
                     </div>
@@ -140,7 +161,14 @@
     </section>
 
     <main class="container mx-auto py-16 px-5 mb-24">
-        <h3 class="text-xl lg:text-3xl font-black text-slate-800 mb-8 border-l-4 border-emerald-600 pl-4 uppercase">Berita Terbaru</h3>
+        <div class="flex justify-between items-end mb-8 border-l-4 border-emerald-600 pl-4">
+            <div>
+                <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">Informasi Terkini</p>
+                <h3 class="text-xl lg:text-3xl font-black text-slate-800 uppercase">Berita Terbaru</h3>
+            </div>
+            <a href="#" class="text-xs font-bold text-emerald-600 hover:underline">Lihat Semua <i class="fas fa-arrow-right ml-1"></i></a>
+        </div>
+
         <div id="daftar-berita" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all group">
                 <div class="h-44 overflow-hidden">
@@ -148,7 +176,7 @@
                 </div>
                 <div class="p-6">
                     <span class="text-[10px] font-black text-emerald-600 uppercase tracking-widest bg-emerald-50 px-2 py-1 rounded">Update</span>
-                    <h4 class="font-bold text-slate-800 mt-3 text-sm lg:text-base leading-snug group-hover:text-emerald-700">Pemberdayaan Masyarakat Melalui Digitalisasi PCM Karangploso</h4>
+                    <h4 class="font-bold text-slate-800 mt-3 text-sm lg:text-base leading-snug group-hover:text-emerald-700 transition">Pemberdayaan Masyarakat Melalui Digitalisasi PCM Karangploso</h4>
                     <p class="text-[11px] text-slate-400 mt-4 flex items-center"><i class="far fa-clock mr-2"></i> Baru Saja</p>
                 </div>
             </div>
@@ -161,12 +189,32 @@
     </button>
 
     <script>
+        // Logika Menu Mobile (Hamburger)
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const closeMenu = document.getElementById('close-menu');
         
-        menuBtn.onclick = () => mobileMenu.classList.add('active');
-        closeMenu.onclick = () => mobileMenu.classList.remove('active');
+        // Buka menu
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Mencegah scroll saat menu buka
+        });
+        
+        // Tutup menu
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Logika Accordion Organisasi di Mobile
+        const mobileOrgBtn = document.getElementById('mobile-org-btn');
+        const mobileOrgContent = document.getElementById('mobile-org-content');
+        const orgArrow = document.getElementById('org-arrow');
+
+        mobileOrgBtn.addEventListener('click', () => {
+            mobileOrgContent.classList.toggle('hidden');
+            orgArrow.classList.toggle('rotate-180');
+        });
     </script>
 </body>
 </html>
