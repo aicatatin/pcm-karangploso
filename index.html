@@ -21,33 +21,33 @@
         }
         #mobile-menu.active { transform: translateX(0); }
         #hero-image { transition: opacity 0.5s ease-in-out; }
-        
-        /* Masking untuk gambar iklan agar menyatu dengan background */
         .mask-gradient { mask-image: linear-gradient(to right, transparent, black); }
     </style>
 </head>
 <body class="bg-gray-50 text-slate-900">
 
-    <nav class="bg-white sticky top-0 z-[100] py-4 border-b border-gray-100 shadow-sm">
+    <nav class="bg-white sticky top-0 z-[100] py-2 md:py-3 border-b border-gray-100 shadow-sm">
         <div class="container mx-auto px-5 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 md:w-12 md:h-12 gradient-main rounded-xl flex items-center justify-center text-white font-extrabold text-xl shadow-lg">M</div>
+            <div class="flex items-center space-x-2.5">
+                <div class="w-8 h-8 md:w-9 md:h-9 gradient-main rounded-lg flex items-center justify-center text-white font-extrabold text-base shadow-md">M</div>
                 <div>
-                    <h1 class="font-extrabold text-xs md:text-base leading-none text-slate-800 tracking-tighter uppercase">PCM Karangploso</h1>
-                    <p class="text-[8px] md:text-[10px] font-bold text-slate-400 tracking-widest uppercase">Portal Digital</p>
+                    <h1 class="font-extrabold text-[11px] md:text-sm leading-none text-slate-800 tracking-tighter uppercase">PCM Karangploso</h1>
+                    <p class="text-[7px] md:text-[9px] font-bold text-slate-400 tracking-widest uppercase">Portal Digital</p>
                 </div>
             </div>
-            <div class="hidden lg:flex items-center space-x-6 text-[13px] font-bold text-slate-600">
+
+            <div class="hidden lg:flex items-center space-x-5 text-[12px] font-bold text-slate-600">
                 <a href="#" class="hover:text-emerald-600 transition">Beranda</a>
                 <a href="#" class="hover:text-emerald-600 transition">Profil</a>
                 <a href="#" class="text-emerald-700 font-extrabold transition">Amal Usaha</a>
                 <a href="#" class="hover:text-emerald-600 transition">Berita</a>
                 <a href="#" class="hover:text-emerald-600 transition">Kontak</a>
             </div>
-            <div class="flex items-center space-x-3">
-                <button class="btn-donasi text-white px-4 py-2 md:px-6 md:py-2.5 rounded-full text-[10px] md:text-xs font-extrabold shadow-lg uppercase">Donasi</button>
-                <button id="menu-btn" class="lg:hidden text-slate-800 p-2 focus:outline-none">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+
+            <div class="flex items-center space-x-2">
+                <button class="btn-donasi text-white px-4 py-1.5 md:px-5 md:py-2 rounded-full text-[9px] md:text-[11px] font-extrabold shadow-md uppercase transition hover:brightness-110">Donasi</button>
+                <button id="menu-btn" class="lg:hidden text-slate-800 p-1.5 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
         </div>
@@ -253,40 +253,30 @@
     </button>
 
     <script>
-        // Hamburger Menu
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const closeMenu = document.getElementById('close-menu');
         menuBtn.onclick = () => { mobileMenu.classList.add('active'); document.body.style.overflow = 'hidden'; };
         closeMenu.onclick = () => { mobileMenu.classList.remove('active'); document.body.style.overflow = 'auto'; };
 
-        // Filter Berita
         function filterNews(category) {
             const cards = document.querySelectorAll('.news-card');
             const btns = document.querySelectorAll('[onclick^="filterNews"]');
-            
             btns.forEach(btn => {
                 btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-md');
                 btn.classList.add('hover:bg-white', 'text-slate-600');
             });
-
             document.getElementById('btn-' + category).classList.add('bg-emerald-600', 'text-white', 'shadow-md');
             document.getElementById('btn-' + category).classList.remove('hover:bg-white', 'text-slate-600');
-
             cards.forEach(card => {
-                if (category === 'terbaru') {
-                    card.classList.remove('hidden');
-                } else {
-                    if (card.getAttribute('data-category') === category) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
+                if (category === 'terbaru') { card.classList.remove('hidden'); } 
+                else {
+                    if (card.getAttribute('data-category') === category) { card.classList.remove('hidden'); } 
+                    else { card.classList.add('hidden'); }
                 }
             });
         }
 
-        // Carousel Hero (Gambar & Judul)
         const heroData = [
             { title: "SDU Permata Mulia Malang", category: "Amal Usaha (AUM)", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" },
             { title: "Majelis Tabligh & Dakwah", category: "Majelis Cabang", img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=800" },
