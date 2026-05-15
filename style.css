@@ -1,0 +1,14 @@
+/* Custom smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom font atau animasi jika diperlukan */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
