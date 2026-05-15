@@ -8,226 +8,198 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .gradient-main { background: linear-gradient(135deg, #065f46 0%, #0d9488 100%); }
-        .btn-donasi { background: linear-gradient(90deg, #059669 0%, #0d9488 100%); }
         .glass { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
-        .hero-curve { border-radius: 0 0 40px 40px; }
-        @media (min-width: 1024px) { .hero-curve { border-radius: 0 0 100px 100px; } }
+        .hero-curve { border-radius: 0 0 50px 50px; }
+        #hero-image { transition: opacity 0.5s ease-in-out; }
         
-        #mobile-menu { 
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-            transform: translateX(100%); 
-        }
-        #mobile-menu.active { transform: translateX(0); }
-
-        #hero-image {
-            transition: opacity 0.5s ease-in-out;
-        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #0d9488; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-gray-50 text-slate-900">
+<body class="bg-slate-50 text-slate-900">
 
     <nav class="bg-white sticky top-0 z-[100] py-4 border-b border-gray-100 shadow-sm">
         <div class="container mx-auto px-5 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 md:w-12 md:h-12 gradient-main rounded-xl flex items-center justify-center text-white font-extrabold text-xl shadow-lg">M</div>
-                <div>
-                    <h1 class="font-extrabold text-xs md:text-base leading-none text-slate-800 tracking-tighter uppercase">PCM Karangploso</h1>
-                    <p class="text-[8px] md:text-[10px] font-bold text-slate-400 tracking-widest uppercase">Portal Digital</p>
-                </div>
+                <div class="w-10 h-10 gradient-main rounded-xl flex items-center justify-center text-white font-bold text-xl">M</div>
+                <h1 class="font-extrabold text-xs md:text-base leading-none text-slate-800 uppercase">PCM Karangploso</h1>
             </div>
-            
-            <div class="hidden lg:flex items-center space-x-6 text-[13px] font-bold text-slate-600">
-                <a href="#" class="hover:text-emerald-600 transition">Beranda</a>
-                <a href="#" class="hover:text-emerald-600 transition">Profil</a>
-                <div class="relative group cursor-pointer">
-                    <span class="flex items-center hover:text-emerald-600">Organisasi <i class="fas fa-chevron-down ml-1 text-[10px]"></i></span>
-                    <div class="absolute hidden group-hover:block bg-white shadow-2xl border border-gray-100 rounded-2xl p-4 w-64 mt-2 left-0">
-                        <a href="#" class="block py-2 px-3 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition">Majelis & Lembaga</a>
-                        <a href="#" class="block py-2 px-3 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition">Pimpinan Ranting (PRM)</a>
-                        <a href="#" class="block py-2 px-3 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition">Organisasi Otonom (Ortom)</a>
-                    </div>
-                </div>
-                <a href="#" class="text-emerald-700 font-extrabold transition">Amal Usaha</a>
-                <a href="#" class="hover:text-emerald-600 transition">Berita</a>
-                <a href="#" class="hover:text-emerald-600 transition">Kontak</a>
-            </div>
-
-            <div class="flex items-center space-x-3">
-                <button class="btn-donasi text-white px-4 py-2 md:px-6 md:py-2.5 rounded-full text-[10px] md:text-xs font-extrabold shadow-lg uppercase">Donasi</button>
-                <button id="menu-btn" class="lg:hidden text-slate-800 p-2 focus:outline-none">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
-            </div>
+            <button class="bg-emerald-600 text-white px-5 py-2 rounded-full text-xs font-bold uppercase">Donasi</button>
         </div>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-[150] lg:hidden p-8 flex flex-col">
-        <div class="flex justify-between items-center mb-10 border-b pb-5">
-            <div class="flex items-center space-x-3">
-                <div class="w-9 h-9 gradient-main rounded-lg flex items-center justify-center text-white font-bold">M</div>
-                <span class="font-black text-sm tracking-tight text-slate-800">PCM KARANGPLOSO</span>
-            </div>
-            <button id="close-menu" class="text-4xl leading-none text-slate-400 hover:text-red-500 transition">&times;</button>
-        </div>
-        <div class="flex flex-col space-y-5 text-lg font-bold text-slate-800 overflow-y-auto">
-            <a href="#" class="text-emerald-600">Beranda</a>
-            <a href="#">Profil</a>
-            <div class="space-y-4">
-                <button id="mobile-org-btn" class="flex justify-between items-center w-full">
-                    <span>Organisasi</span>
-                    <i id="org-arrow" class="fas fa-chevron-down text-sm transition-transform"></i>
-                </button>
-                <div id="mobile-org-content" class="hidden flex flex-col space-y-4 pl-4 border-l-2 border-emerald-100 text-base font-semibold text-slate-500">
-                    <a href="#">Majelis & Lembaga</a>
-                    <a href="#">Pimpinan Ranting (PRM)</a>
-                    <a href="#">Organisasi Otonom (Ortom)</a>
+    <header class="gradient-main hero-curve pt-10 pb-20 lg:pt-16 lg:pb-32 px-5 text-white relative overflow-hidden">
+        <div class="container mx-auto grid lg:grid-cols-2 gap-10 items-center relative z-10">
+            <div class="order-1 text-center lg:text-left space-y-5">
+                <h2 class="text-3xl lg:text-5xl font-black leading-tight">Mencerahkan Umat, <br><span class="text-emerald-300">Memajukan Bangsa.</span></h2>
+                <p class="opacity-80 max-w-lg mx-auto lg:mx-0">Portal informasi terintegrasi Pimpinan Cabang Muhammadiyah Karangploso.</p>
+                <div class="flex justify-center lg:justify-start gap-3">
+                    <button class="bg-white text-emerald-800 px-6 py-3 rounded-2xl font-bold text-sm shadow-xl">Jelajahi</button>
+                    <button class="glass px-6 py-3 rounded-2xl font-bold text-sm">Tentang Kami</button>
                 </div>
             </div>
-            <a href="#">Amal Usaha</a>
-            <a href="#">Berita</a>
-            <a href="#">Kontak</a>
-        </div>
-        <button class="mt-auto w-full btn-donasi text-white py-4 rounded-2xl font-black shadow-xl uppercase">Donasi Sekarang</button>
-    </div>
-
-    <header class="gradient-main hero-curve pt-12 pb-24 lg:pt-20 lg:pb-40 px-5 text-white overflow-hidden relative">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
-        
-        <div class="container mx-auto relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                
-                <div class="space-y-6 order-1 lg:order-1 text-center lg:text-left">
-                    <div class="inline-block px-4 py-1.5 rounded-full bg-emerald-400/20 border border-emerald-400/30 text-emerald-200 text-xs font-bold uppercase tracking-widest animate-pulse">
-                        Selamat Datang di Portal Digital
-                    </div>
-                    <h2 class="text-3xl lg:text-5xl font-black leading-tight">
-                        Mencerahkan Umat, <br>
-                        <span class="text-emerald-300">Memajukan Bangsa.</span>
-                    </h2>
-                    <p class="text-sm lg:text-lg opacity-80 leading-relaxed max-w-xl font-medium mx-auto lg:mx-0">
-                        Khidmat Pimpinan Cabang Muhammadiyah Karangploso dalam mengelola Majelis, Ortom, dan Amal Usaha (AUM) demi mewujudkan masyarakat Islam yang sebenar-benarnya.
-                    </p>
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2 pb-6 lg:pb-0">
-                        <button class="bg-white text-emerald-800 px-8 py-3 rounded-2xl font-bold shadow-xl hover:bg-emerald-50 transition-all flex items-center group">
-                            Jelajahi <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
-                        </button>
-                        <button class="glass px-8 py-3 rounded-2xl font-bold hover:bg-white/20 transition-all border border-white/30">
-                            Tentang Kami
-                        </button>
-                    </div>
+            <div class="order-2 relative">
+                <div class="rounded-[2rem] overflow-hidden border-4 border-white/20 shadow-2xl aspect-video lg:aspect-square">
+                    <img id="hero-image" src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover">
                 </div>
-
-                <div class="order-2 lg:order-2">
-                    <div class="relative group">
-                        <div class="relative z-20 rounded-[2.5rem] overflow-hidden border-8 border-white/10 shadow-2xl aspect-video lg:aspect-square">
-                            <img id="hero-image" src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" 
-                                 class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-transparent to-transparent flex flex-col justify-end p-6 lg:p-10">
-                                <span id="hero-category" class="text-emerald-400 text-[10px] lg:text-xs font-black uppercase tracking-tighter mb-1">Amal Usaha (AUM)</span>
-                                <h3 id="hero-image-title" class="text-lg lg:text-2xl font-bold text-white leading-tight">SDU Permata Mulia Malang</h3>
-                            </div>
-                        </div>
-                        <div class="absolute -bottom-4 -right-4 w-full h-full bg-emerald-800/30 rounded-[2.5rem] z-10"></div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </header>
 
-    <section class="container mx-auto -mt-10 lg:-mt-16 px-5 relative z-20">
-        <div class="bg-white rounded-3xl shadow-xl p-6 lg:p-10 grid grid-cols-4 md:grid-cols-8 gap-4 lg:gap-8 border border-gray-100">
-            <div class="flex flex-col items-center group cursor-pointer text-center">
-                <div class="w-10 h-10 lg:w-14 lg:h-14 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-2 shadow-sm group-hover:bg-emerald-600 group-hover:text-white transition-all"><i class="fas fa-person-praying"></i></div>
-                <span class="text-[8px] lg:text-[11px] font-extrabold uppercase text-slate-500">Sholat</span>
-            </div>
-            <div class="flex flex-col items-center group cursor-pointer text-center">
-                <div class="w-10 h-10 lg:w-14 lg:h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-2 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-all"><i class="fas fa-book-quran"></i></div>
-                <span class="text-[8px] lg:text-[11px] font-extrabold uppercase text-slate-500">Al-Quran</span>
-            </div>
-            <div class="flex flex-col items-center group cursor-pointer text-center">
-                <div class="w-10 h-10 lg:w-14 lg:h-14 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center mb-2 shadow-sm group-hover:bg-orange-600 group-hover:text-white transition-all"><i class="fas fa-kaaba"></i></div>
-                <span class="text-[8px] lg:text-[11px] font-extrabold uppercase text-slate-500">Kiblat</span>
-            </div>
-            <div class="flex flex-col items-center group cursor-pointer text-center">
-                <div class="w-10 h-10 lg:w-14 lg:h-14 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mb-2 shadow-sm group-hover:bg-purple-600 group-hover:text-white transition-all"><i class="fas fa-hands-praying"></i></div>
-                <span class="text-[8px] lg:text-[11px] font-extrabold uppercase text-slate-500">Doa</span>
-            </div>
-            <div class="flex flex-col items-center group cursor-pointer text-center">
-                <div class="w-10 h-10 lg:w-14 lg:h-14 bg-red-50 text-red-600 rounded-xl flex items-center justify-center mb-2 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-all"><i class="fas fa-calendar-day"></i></div>
-                <span class="text-[8px] lg:text-[11px] font-extrabold uppercase text-slate-500">Event</span>
-            </div>
-            <div class="flex flex-col items-center group cursor-pointer text-center">
-                <div class="w-10 h-10 lg:w-14 lg:h-14 bg-cyan-50 text-cyan-600 rounded-xl flex items-center justify-center mb-2 shadow-sm group-hover:bg-cyan-600 group-hover:text-white transition-all"><i class="fas fa-id-card"></i></div>
-                <span class="text-[8px] lg:text-[11px] font-extrabold uppercase text-slate-500">KTAM</span>
-            </div>
-            <div class="flex flex-col items-center group cursor-pointer text-center">
-                <div class="w-10 h-10 lg:w-14 lg:h-14 bg-yellow-50 text-yellow-600 rounded-xl flex items-center justify-center mb-2 shadow-sm group-hover:bg-yellow-600 group-hover:text-white transition-all"><i class="fas fa-book"></i></div>
-                <span class="text-[8px] lg:text-[11px] font-extrabold uppercase text-slate-500">Buku</span>
-            </div>
-            <div class="flex flex-col items-center group cursor-pointer text-center">
-                <div class="w-10 h-10 lg:w-14 lg:h-14 bg-gray-100 text-gray-500 rounded-xl flex items-center justify-center mb-2 shadow-sm"><i class="fas fa-ellipsis-h"></i></div>
-                <span class="text-[8px] lg:text-[11px] font-extrabold uppercase text-slate-500">Lainnya</span>
+    <section class="container mx-auto px-5 mt-10">
+        <div class="bg-emerald-900 rounded-[2rem] overflow-hidden relative group shadow-2xl">
+            <div class="flex items-center min-h-[150px] lg:min-h-[250px] p-6 lg:p-12">
+                <div class="w-2/3 lg:w-1/2 space-y-2 lg:space-y-4 relative z-10">
+                    <span class="bg-yellow-400 text-emerald-900 text-[10px] font-black px-3 py-1 rounded-full uppercase">Kegiatan Mendatang</span>
+                    <h3 class="text-xl lg:text-4xl font-black text-white leading-tight">Pengajian Ahad Pagi & Bazar Ekonomi Ummat</h3>
+                    <p class="text-white/70 text-xs lg:text-base">📅 25 Mei 2026 | 📍 Masjid Al-Ikhlas Karangploso</p>
+                    <button class="bg-white text-emerald-900 px-4 py-2 lg:px-6 lg:py-3 rounded-xl font-bold text-xs lg:text-sm mt-2">Daftar Sekarang</button>
+                </div>
+                <div class="absolute right-0 top-0 h-full w-1/2 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover opacity-50 lg:opacity-100 mask-gradient">
+                </div>
             </div>
         </div>
     </section>
 
-    <main class="container mx-auto py-16 px-5 mb-24">
-        <h3 class="text-xl lg:text-3xl font-black text-slate-800 mb-8 border-l-4 border-emerald-600 pl-4 uppercase">Berita Terbaru</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all group">
-                <div class="h-44 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+    <section class="container mx-auto py-16 px-5">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
+            <h3 class="text-2xl font-black text-slate-800 border-l-4 border-emerald-600 pl-4 uppercase">Informasi Terkini</h3>
+            <div class="flex bg-slate-200 p-1 rounded-xl overflow-x-auto text-xs font-bold">
+                <button onclick="filterNews('semua')" class="px-5 py-2 rounded-lg bg-emerald-600 text-white whitespace-nowrap">Semua</button>
+                <button onclick="filterNews('aum')" class="px-5 py-2 rounded-lg hover:bg-white transition whitespace-nowrap">Berita AUM</button>
+                <button onclick="filterNews('majelis')" class="px-5 py-2 rounded-lg hover:bg-white transition whitespace-nowrap">Berita Majelis</button>
+            </div>
+        </div>
+
+        <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="news-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 group" data-cat="aum">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=500" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-4 left-4 bg-emerald-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Berita AUM</span>
                 </div>
                 <div class="p-6">
-                    <span class="text-[10px] font-black text-emerald-600 uppercase tracking-widest bg-emerald-50 px-2 py-1 rounded">Update</span>
-                    <h4 class="font-bold text-slate-800 mt-3 text-sm lg:text-base leading-snug group-hover:text-emerald-700 transition">Pemberdayaan Masyarakat Melalui Digitalisasi PCM Karangploso</h4>
-                    <p class="text-[11px] text-slate-400 mt-4 flex items-center"><i class="far fa-clock mr-2"></i> Baru Saja</p>
+                    <h4 class="font-bold text-slate-800 text-base mb-3 leading-snug">Pembangunan Gedung Baru SDU Permata Mulia Mencapai 80%</h4>
+                    <p class="text-[11px] text-slate-400 flex items-center"><i class="far fa-calendar mr-2"></i> 15 Mei 2026</p>
+                </div>
+            </div>
+
+            <div class="news-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 group" data-cat="majelis">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=500" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Berita Majelis</span>
+                </div>
+                <div class="p-6">
+                    <h4 class="font-bold text-slate-800 text-base mb-3 leading-snug">Majelis Tabligh Gelar Pelatihan Muballigh Muda se-Karangploso</h4>
+                    <p class="text-[11px] text-slate-400 flex items-center"><i class="far fa-calendar mr-2"></i> 14 Mei 2026</p>
+                </div>
+            </div>
+
+            <div class="news-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 group" data-cat="umum">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1523240715630-991f2e811eb9?auto=format&fit=crop&q=80&w=500" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-4 left-4 bg-slate-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Update PCM</span>
+                </div>
+                <div class="p-6">
+                    <h4 class="font-bold text-slate-800 text-base mb-3 leading-snug">Rapat Kerja Tahunan: Fokus pada Pemberdayaan Ekonomi Digital</h4>
+                    <p class="text-[11px] text-slate-400 flex items-center"><i class="far fa-calendar mr-2"></i> 12 Mei 2026</p>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
 
-    <button class="fixed bottom-6 right-6 z-[200] gradient-main text-white px-5 py-3 lg:px-8 lg:py-4 rounded-2xl lg:rounded-3xl shadow-2xl flex items-center space-x-3 hover:scale-105 active:scale-95 transition-all border-2 border-white/20">
-        <i class="fas fa-robot text-lg lg:text-xl"></i>
-        <span class="font-bold text-xs lg:text-base uppercase tracking-tighter">Tanya AICA</span>
-    </button>
+    <footer class="bg-slate-900 text-white pt-16 pb-8 px-5">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-white/10 pb-12">
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 gradient-main rounded-xl flex items-center justify-center font-bold">M</div>
+                    <span class="font-black tracking-tight">PCM KARANGPLOSO</span>
+                </div>
+                <p class="text-sm text-slate-400 leading-relaxed">
+                    Mewujudkan masyarakat Karangploso yang cerdas, berdaya, dan religius melalui gerakan Dakwah Amar Ma'ruf Nahi Munkar.
+                </p>
+                <div class="flex space-x-4 pt-2">
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-emerald-600 transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-emerald-600 transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-emerald-600 transition"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-6 uppercase text-sm tracking-widest text-emerald-400">Organisasi</h4>
+                <ul class="space-y-4 text-sm text-slate-400 font-medium">
+                    <li><a href="#" class="hover:text-white transition">Majelis & Lembaga</a></li>
+                    <li><a href="#" class="hover:text-white transition">Pimpinan Ranting</a></li>
+                    <li><a href="#" class="hover:text-white transition">Organisasi Otonom</a></li>
+                    <li><a href="#" class="hover:text-white transition">Pusat Data</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-6 uppercase text-sm tracking-widest text-emerald-400">Amal Usaha</h4>
+                <ul class="space-y-4 text-sm text-slate-400 font-medium">
+                    <li><a href="#" class="hover:text-white transition">SDU Permata Mulia</a></li>
+                    <li><a href="#" class="hover:text-white transition">Klinik Muhammadiyah</a></li>
+                    <li><a href="#" class="hover:text-white transition">Lazismu Karangploso</a></li>
+                    <li><a href="#" class="hover:text-white transition">BTM Mandiri</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-6 uppercase text-sm tracking-widest text-emerald-400">Hubungi Kami</h4>
+                <ul class="space-y-4 text-sm text-slate-400">
+                    <li class="flex items-start">
+                        <i class="fas fa-map-marker-alt mt-1 mr-3 text-emerald-500"></i>
+                        <span>Jl. Raya Karangploso No. 123, Malang, Jawa Timur</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-phone mr-3 text-emerald-500"></i>
+                        <span>(0341) 1234567</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-envelope mr-3 text-emerald-500"></i>
+                        <span>info@pcmkarangploso.or.id</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto pt-8 text-center text-xs text-slate-500 font-bold">
+            <p>&copy; 2026 PORTAL DIGITAL PCM KARANGPLOSO. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <script>
-        // Hamburger Menu
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const closeMenu = document.getElementById('close-menu');
-        menuBtn.onclick = () => { mobileMenu.classList.add('active'); document.body.style.overflow = 'hidden'; };
-        closeMenu.onclick = () => { mobileMenu.classList.remove('active'); document.body.style.overflow = 'auto'; };
-
-        // Mobile Organisasi Dropdown
-        const mobOrgBtn = document.getElementById('mobile-org-btn');
-        const mobOrgCont = document.getElementById('mobile-org-content');
-        const orgArrow = document.getElementById('org-arrow');
-        mobOrgBtn.onclick = () => { mobOrgCont.classList.toggle('hidden'); orgArrow.classList.toggle('rotate-180'); };
-
-        // Dynamic Hero Carousel
+        // Hero Image Slider
         const heroData = [
-            { title: "SDU Permata Mulia Malang", category: "Amal Usaha (AUM)", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" },
-            { title: "Majelis Tabligh & Dakwah", category: "Majelis Cabang", img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=800" },
-            { title: "Kader Muhammadiyah Muda", category: "Organisasi Otonom (Ortom)", img: "https://images.unsplash.com/photo-1523240715630-991f2e811eb9?auto=format&fit=crop&q=80&w=800" }
+            { title: "SDU Permata Mulia", cat: "AUM", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" },
+            { title: "Bakti Sosial Majelis", cat: "Majelis", img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=800" }
         ];
-
-        let index = 0;
+        let idx = 0;
         setInterval(() => {
-            index = (index + 1) % heroData.length;
-            const imgEl = document.getElementById('hero-image');
-            imgEl.style.opacity = '0';
+            idx = (idx + 1) % heroData.length;
+            const img = document.getElementById('hero-image');
+            img.style.opacity = '0';
             setTimeout(() => {
-                imgEl.src = heroData[index].img;
-                document.getElementById('hero-image-title').innerText = heroData[index].title;
-                document.getElementById('hero-category').innerText = heroData[index].category;
-                imgEl.style.opacity = '1';
+                img.src = heroData[idx].img;
+                img.style.opacity = '1';
             }, 500);
         }, 5000);
+
+        // Filter Berita Sederhana
+        function filterNews(cat) {
+            const cards = document.querySelectorAll('.news-card');
+            cards.forEach(card => {
+                if(cat === 'semua' || card.getAttribute('data-cat') === cat) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html>
